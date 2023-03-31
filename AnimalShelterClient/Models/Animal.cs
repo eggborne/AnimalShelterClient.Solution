@@ -15,7 +15,7 @@ namespace AnimalShelterClient.Models
 
     public static Animal[] GetAnimals()
     {
-      Task<string> apiCallTask = ApiHelper.ApiCall();
+      Task<string> apiCallTask = ApiHelper.GetAll();
       string result =  apiCallTask.Result;
 
       JObject jsonResponse = JObject.Parse(result);

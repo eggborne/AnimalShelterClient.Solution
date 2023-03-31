@@ -52,11 +52,7 @@
                 {
                   @Html.Hidden("id", animal.AnimalId)
                   <input type="hidden" name="currentPage" value=@ViewBag.CurrentPage>
-
-                  // <a href='@Url.Action("Delete", "Home", new { id = animal.AnimalId, currentPage = ViewBag.CurrentPage })'>
                   <button class="red">Delete</button>
-                  // </a>
-                  
                 }
                 </div>
             }
