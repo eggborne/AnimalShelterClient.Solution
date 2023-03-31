@@ -1,0 +1,16 @@
+@using AnimalShelterClient.Models
+@model Animal
+
+<div class="modal-message">
+  <div>Are you sure you want to delete <span class="highlighted">@Html.DisplayFor(model => model.Name)</span>?</div>
+</div>
+<div class="button-area">
+  @using (Html.BeginForm("Delete", "Home", new { id = @Model.AnimalId, currentPage = ViewBag.CurrentPage }))
+  {
+    <button class="red" type="submit">Delete</button>
+  }
+</div>
+
+<a href='@Url.Action("Index", "Home")'>
+  <button>Cancel</button>
+</a>

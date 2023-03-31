@@ -1,0 +1,16 @@
+<header>
+  <h1 class="home-header">Animal Shelter</h1>
+  <div id="header-button-area">
+  @if (User.Identity.IsAuthenticated) {
+      <p>logged in as <span class="highlighted">@User.Identity.Name</span></p>
+      @using (Html.BeginForm("LogOff", "Account"))
+      {
+          <button type="submit" class="red">Log out</button>
+      }
+  } else {
+      <a href="/Account">
+          <button class="green">Log in / Register</button>
+      </a>
+  }
+  </div>
+</header>

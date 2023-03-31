@@ -1,0 +1,98 @@
+@{
+    ViewData["Title"] = "Animal Shelter Client";
+}
+
+@using AnimalShelterClient.Models
+
+<div class="button-area">
+    @if (ViewBag.CurrentPage > 1) {
+        <a href='/?page=@(ViewBag.CurrentPage - 1)&pageSize=@ViewBag.PageSize'>
+            <button>Prev</button>
+        </a>
+    }
+    @for (var i = (ViewBag.CurrentPage > 3 ? ViewBag.CurrentPage - 3 : 1); i < (ViewBag.CurrentPage <= ((ViewBag.LastId / ViewBag.PageSize) -2) ? ViewBag.CurrentPage + 4 : ((ViewBag.LastId / ViewBag.PageSize) + 2)); i++) {
+        @if (i == ViewBag.CurrentPage) {
+            <div class="current-page">@(i)</div>
+        } else {
+            <a class="page-link" href="/?page=@(i)&pageSize=@ViewBag.PageSize">@(i)</a>
+        }
+    }
+    @if (ViewBag.CurrentPage < ((ViewBag.LastId / ViewBag.PageSize) + 1))
+    {
+        <a href='/?page=@(ViewBag.CurrentPage + 1)&pageSize=@ViewBag.PageSize'>
+            <button>Next</button>
+        </a>
+    }
+</div>
+
+<h1 class="page-header"><span>All Animals</span>
+@if (User.Identity.IsAuthenticated) 
+{ 
+  <a href='@Url.Action("Create", "Home")'>
+      <button class="green">Add an Animal</button>
+  </a>
+}
+</h1>
+
+@if (Model != null)
+{
+<ul id="home-animal-list" class="animal-list obscured">
+    @foreach (Animal animal in Model)
+    {
+        <li class="animal-list-item">
+            <div class="animal-text">@animal.Name</div>
+            <div class="animal-speaker">@animal.Breed</div>
+            @if (User.Identity.IsAuthenticated) {
+                <div class="button-area">
+                @using (Html.BeginForm("LoadEdit", "Home", new { id = animal.AnimalId }))
+                {
+                    <button type="submit" class="yellow">Edit</button>
+                }
+                @using (Html.BeginForm("Delete", "Home", FormMethod.Get))
+                {
+                  @Html.Hidden("id", animal.AnimalId)
+                  <input type="hidden" name="currentPage" value=@ViewBag.CurrentPage>
+
+                  // <a href='@Url.Action("Delete", "Home", new { id = animal.AnimalId, currentPage = ViewBag.CurrentPage })'>
+                  <button class="red">Delete</button>
+                  // </a>
+                  
+                }
+                </div>
+            }
+        </li>
+    }
+</ul>
+}
+else
+{
+    <p>No animals found</p>
+}
+
+<div class="button-area">
+    @if (ViewBag.CurrentPage > 1) {
+        <a href='/?page=@(ViewBag.CurrentPage - 1)&pageSize=@ViewBag.PageSize'>
+            <button>Prev</button>
+        </a>
+    }
+    @for (var i = (ViewBag.CurrentPage > 3 ? ViewBag.CurrentPage - 3 : 1); i < (ViewBag.CurrentPage <= ((ViewBag.LastId / ViewBag.PageSize) -2) ? ViewBag.CurrentPage + 4 : ((ViewBag.LastId / ViewBag.PageSize) + 2)); i++) {
+        @if (i == ViewBag.CurrentPage) {
+            <div class="current-page">@(i)</div>
+        } else {
+            <a class="page-link" href="/?page=@(i)&pageSize=@ViewBag.PageSize">@(i)</a>
+        }
+    }
+    @if (ViewBag.CurrentPage < ((ViewBag.LastId / ViewBag.PageSize) + 1))
+    {
+        <a href='/?page=@(ViewBag.CurrentPage + 1)&pageSize=@ViewBag.PageSize'>
+            <button>Next</button>
+        </a>
+    }
+</div>
+
+<script>
+window.addEventListener("load", () => {
+    document.getElementById("home-animal-list").classList.remove('obscured');
+});
+</script>
+
