@@ -1,0 +1,15 @@
+<div class="button-area">
+    <a href='/?page=@(ViewBag.CurrentPage - 1)&pageSize=@ViewBag.PageSize'>
+        <button disabled=@(ViewBag.CurrentPage == 1)>Prev</button>
+    </a>
+    @for (var i = (ViewBag.CurrentPage > 3 ? ViewBag.CurrentPage - 3 : 1); i < (ViewBag.CurrentPage <= ((ViewBag.LastId / ViewBag.PageSize) - 2) ? ViewBag.CurrentPage + 4 : ((ViewBag.LastId / ViewBag.PageSize) + 1)); i++) {
+        @if (i == ViewBag.CurrentPage) {
+            <div class="current-page">@(i)</div>
+        } else {
+            <a class="page-link" href="/?page=@(i)&pageSize=@ViewBag.PageSize">@(i)</a>
+        }
+    }
+    <a href='/?page=@(ViewBag.CurrentPage + 1)&pageSize=@ViewBag.PageSize'>
+        <button disabled=@(ViewBag.CurrentPage >= (ViewBag.LastId / ViewBag.PageSize))>Next</button>
+    </a>
+</div>

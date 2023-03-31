@@ -4,26 +4,7 @@
 
 @using AnimalShelterClient.Models
 
-<div class="button-area">
-    @if (ViewBag.CurrentPage > 1) {
-        <a href='/?page=@(ViewBag.CurrentPage - 1)&pageSize=@ViewBag.PageSize'>
-            <button>Prev</button>
-        </a>
-    }
-    @for (var i = (ViewBag.CurrentPage > 3 ? ViewBag.CurrentPage - 3 : 1); i < (ViewBag.CurrentPage <= ((ViewBag.LastId / ViewBag.PageSize) -2) ? ViewBag.CurrentPage + 4 : ((ViewBag.LastId / ViewBag.PageSize) + 2)); i++) {
-        @if (i == ViewBag.CurrentPage) {
-            <div class="current-page">@(i)</div>
-        } else {
-            <a class="page-link" href="/?page=@(i)&pageSize=@ViewBag.PageSize">@(i)</a>
-        }
-    }
-    @if (ViewBag.CurrentPage < ((ViewBag.LastId / ViewBag.PageSize) + 1))
-    {
-        <a href='/?page=@(ViewBag.CurrentPage + 1)&pageSize=@ViewBag.PageSize'>
-            <button>Next</button>
-        </a>
-    }
-</div>
+@await Html.PartialAsync("PageLinkSpread")
 
 <h1 class="page-header"><span>All Animals</span>
 @if (User.Identity.IsAuthenticated) 
@@ -65,26 +46,7 @@ else
     <p>No animals found</p>
 }
 
-<div class="button-area">
-    @if (ViewBag.CurrentPage > 1) {
-        <a href='/?page=@(ViewBag.CurrentPage - 1)&pageSize=@ViewBag.PageSize'>
-            <button>Prev</button>
-        </a>
-    }
-    @for (var i = (ViewBag.CurrentPage > 3 ? ViewBag.CurrentPage - 3 : 1); i < (ViewBag.CurrentPage <= ((ViewBag.LastId / ViewBag.PageSize) -2) ? ViewBag.CurrentPage + 4 : ((ViewBag.LastId / ViewBag.PageSize) + 2)); i++) {
-        @if (i == ViewBag.CurrentPage) {
-            <div class="current-page">@(i)</div>
-        } else {
-            <a class="page-link" href="/?page=@(i)&pageSize=@ViewBag.PageSize">@(i)</a>
-        }
-    }
-    @if (ViewBag.CurrentPage < ((ViewBag.LastId / ViewBag.PageSize) + 1))
-    {
-        <a href='/?page=@(ViewBag.CurrentPage + 1)&pageSize=@ViewBag.PageSize'>
-            <button>Next</button>
-        </a>
-    }
-</div>
+@await Html.PartialAsync("PageLinkSpread")
 
 <script>
 window.addEventListener("load", () => {

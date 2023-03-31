@@ -76,6 +76,8 @@ h1.page-header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 1rem;
+  gap: 1rem;
 }
 h1 button {
   font-size: 1rem;
@@ -95,6 +97,15 @@ button {
   background-color: rgb(84, 78, 78);
   color: #eee;
   border-radius: 0.25rem;
+}
+
+button:disabled {
+  opacity: 0.5;
+  background-color: rgb(87, 101, 111);
+}
+
+button:disabled:hover {
+  outline: unset;
 }
 
 button.green {
