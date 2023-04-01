@@ -9,6 +9,8 @@
   --header-text-color: #5f835f;
 	--text-highlight-color: rgb(160, 128, 68);
   --hover-outline-color: rgb(193, 238, 193);
+  --link-color: rgb(255, 145, 0);
+  --current-page-link-color: rgb(143, 149, 255);
 
   --default-button-color: rgb(84, 78, 78);
   --button-green: green;
@@ -58,7 +60,7 @@ select {
 }
 
 a {
-  color: rgb(255, 145, 0);
+  color: var(--link-color);
 }
 
 .highlighted {
@@ -112,6 +114,24 @@ main {
   padding: 1rem 2rem;
 }
 
+main::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000aa;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+
+main.veiled::after {
+  opacity: 1;
+  pointer-events: unset;
+}
+
 ul {
   padding: 0;
 }
@@ -144,7 +164,7 @@ h1 button {
 .page-link.current {
   background-color: transparent;
   border: none;
-  color: rgb(143, 149, 255);
+  color: var(--current-page-link-color);
   font-weight: bold;
 }
 
