@@ -68,7 +68,7 @@ a {
   font-weight: bold;
 }
 
-header {
+header, footer {
   height: var(--header-height);
   background-color: var(--header-color);
   display: flex;
@@ -76,6 +76,41 @@ header {
   align-items: center;
   padding-left: 1rem;
   padding-right: 0.5rem;
+}
+
+footer a {
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+footer > * {
+  width: 33.3%;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+#github-footer-link {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+}
+
+.github-logo, .github-icon {
+  width: var(--header-height);
+  height: calc(var(--header-height) / 2.5);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.github-logo {
+  background-image: url(../img/Github_Logo_White.png);
+}
+.github-icon {
+  background-image: url(../img/github-mark-white.svg);
+  width: calc(var(--header-height) / 2.5);
 }
 
 #header-button-area {

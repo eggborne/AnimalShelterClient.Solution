@@ -4,13 +4,12 @@
   <div class="modal-message">
     <div>Are you sure you want to delete <span class="highlighted">@Html.DisplayFor(model => model.Name)</span>?</div>
   </div>
-<div class="button-area">
-  @using (Html.BeginForm("Delete", "Home", new { id = @Model.AnimalId, currentPage = ViewBag.CurrentPage, pageSize = ViewBag.pageSize }))
-  {
-    <button class="red" type="submit">Delete</button>
-  }
-</div>
-  
+  <div class="button-area">
+    @using (Html.BeginForm("Delete", "Home", new { id = @Model.AnimalId, currentPage = ViewBag.CurrentPage, pageSize = ViewBag.pageSize }))
+    {
+      <button class="red" type="submit">Delete</button>
+    }
+  </div>
   <div class="button-area">
     <button onclick="hideModal('delete-modal-@Html.DisplayFor(model => model.AnimalId)')">Cancel</button>
   </div>
