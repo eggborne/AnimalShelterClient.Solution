@@ -79,29 +79,18 @@ public class HomeController : Controller
     return RedirectToAction("Edit", animal);
   }
 
-  public ActionResult Edit(Animal animal)
-  {
-    return View(animal);
-  }
-
   [HttpPost, ActionName("Edit")]
-  public ActionResult PutEdit(Animal animal)
+  public ActionResult PutEdit(Animal animal, int currentPage, int pageSize)
   {
     Animal.Put(animal);
-    return RedirectToAction("Index");
-  }
-
-  public ActionResult Delete(int id, int currentPage)
-  {
-    Animal animal = Animal.GetDetails(id);
-    ViewBag.CurrentPage = currentPage;
-    return View(animal);
+    // return RedirectToAction("Index");
+    return RedirectToAction("Index", new { page = currentPage, pageSize = pageSize } );
   }
 
   [HttpPost, ActionName("Delete")]
-  public ActionResult DeleteConfirmed(int id, int currentPage)
+  public ActionResult DeleteConfirmed(int id, int currentPage, int pageSize)
   {
     Animal.Delete(id);
-    return RedirectToAction("Index", new { page = currentPage, pageSize = 5 } );
+    return RedirectToAction("Index", new { page = currentPage, pageSize = pageSize } );
   }
 }

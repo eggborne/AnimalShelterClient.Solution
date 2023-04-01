@@ -33,6 +33,10 @@ body {
   margin: 0;
 }
 
+input, select, textarea {
+  padding: 0.5rem;
+}
+
 .highlighted {
   color: var(--text-highlight-color);
   font-weight: bold;
@@ -252,7 +256,7 @@ button:hover {
 }
 
 .modal.obscured {
-  transform: scaleX(0.95);
+  transform: scale(0.95);
 	opacity: 0;
 	pointer-events: none;
   transition: none;
