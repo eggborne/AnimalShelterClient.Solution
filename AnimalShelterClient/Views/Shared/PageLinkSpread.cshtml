@@ -4,7 +4,7 @@
     </a>
     @for (var i = ViewBag.StartingPageLinkIndex; i < (ViewBag.StartingPageLinkIndex + 5); i++) {
         @if (i == ViewBag.CurrentPage) {
-            <div class="current-page">@(i)</div>
+            <div class="page-link current">@(i)</div>
         } else if (i > ViewBag.TotalPages) {
             continue;
         } else {

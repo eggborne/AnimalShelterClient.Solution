@@ -106,7 +106,7 @@ h1.page-header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 1rem;
+  margin-top: 0;
   gap: 1rem;
 }
 h1 button {
@@ -114,14 +114,22 @@ h1 button {
 }
 
 .page-link {
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #00000033;
   border: var(--small-border);
   border-radius: 0.25rem;
+}
+
+.page-link.current {
+  background-color: transparent;
+  border: none;
+  color: rgb(143, 149, 255);
+  font-weight: bold;
 }
 
 button {
@@ -175,17 +183,14 @@ button:hover {
 }
 
 .button-area.page-link-spread {
-  padding: 0 12rem;
+  padding: 0 15%;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .page-display {
   width: 100%;
   text-align: center;
-}
-
-.current-page {
-  color: rgb(143, 149, 255);
-  font-weight: bold;
 }
 
 .animal-list {
