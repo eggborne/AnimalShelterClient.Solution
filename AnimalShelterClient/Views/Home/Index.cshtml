@@ -4,6 +4,8 @@
 
 @using AnimalShelterClient.Models
 
+<div id="home-container">
+
 <h1 class="page-header">
     <span>@ViewBag.TotalCount animals available</span>
     @if (User.Identity.IsAuthenticated) 
@@ -45,6 +47,8 @@ else
 
 @await Html.PartialAsync("PageLinkSpread")
 <div class="page-display">Page @ViewBag.CurrentPage of @ViewBag.TotalPages</div>
+
+</div>
 
 <script>
 window.addEventListener("load", () => {
