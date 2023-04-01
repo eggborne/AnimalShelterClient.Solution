@@ -1,0 +1,22 @@
+@model AnimalShelterClient.Models.Animal;
+
+<li id="animal-list-item-@Model.AnimalId" class="animal-list-item @(Model.Species)-list-item">
+  <div class="animal-id">id #@Model.AnimalId</div>
+
+  <div class="icon @(Model.Species)-icon @Model.Gender.ToLower()">
+      <div class="animal-species">@Model.Species</div>
+  </div>
+  <div class="animal-stat-list">
+      <div class="animal-name">@Model.Name</div>
+      <div class="animal-breed">@Model.Breed</div>
+      <div class="animal-gender">@Model.Gender</div>
+  </div>
+  @if (User.Identity.IsAuthenticated) {
+      <div class="button-area">    
+          @await Html.PartialAsync("EditModal", Model)
+          @await Html.PartialAsync("DeleteModal", Model) 
+          <button class="yellow" onclick="showModal('edit-modal-@Model.AnimalId')">Edit</button>
+          <button class="red" onclick="showModal('delete-modal-@Model.AnimalId')">Delete</button>
+      </div>
+  }
+</li>

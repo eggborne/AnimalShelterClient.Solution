@@ -4,48 +4,27 @@
 
 @using AnimalShelterClient.Models
 
-<h1 class="page-header"><span>@ViewBag.TotalCount animals available</span></h1>
 <h1 class="page-header">
-@if (User.Identity.IsAuthenticated) 
+    <span>@ViewBag.TotalCount animals available</span>
+    @if (User.Identity.IsAuthenticated) 
     {
         @await Html.PartialAsync("CreateModal", new Animal())
         <button class="green" onclick="showModal('create-modal')">Add an Animal</button>
     }
 </h1>
+
 <div class="page-display">Page @ViewBag.CurrentPage of @ViewBag.TotalPages</div>
 @await Html.PartialAsync("PageLinkSpread")
 
 @if (Model != null)
 {
-<ul id="home-animal-list" class="animal-list obscured">
-    @foreach (Animal animal in Model)
-    {
-        <li class="animal-list-item @(animal.Species)-list-item">
-            <div class="animal-id">id #@animal.AnimalId</div>
-
-            <div class="icon @(animal.Species)-icon @animal.Gender.ToLower()">
-                <div class="animal-species">@animal.Species</div>
-            </div>
-            <div class="animal-stat-list">
-                <div class="animal-name">@animal.Name</div>
-                <div class="animal-breed">@animal.Breed</div>
-                <div class="animal-gender">@animal.Gender</div>
-            </div>
-            @if (User.Identity.IsAuthenticated) {
-                <div class="button-area">    
-                    @await Html.PartialAsync("EditModal", animal)
-                    @await Html.PartialAsync("DeleteModal", animal) 
-                    <button class="yellow" onclick="showModal('edit-modal-@animal.AnimalId')">Edit</button>
-                    <button class="red" onclick="showModal('delete-modal-@animal.AnimalId')">Delete</button>
-                </div>
-            }
-        </li>
-    }
-</ul>
+    <ul id="home-animal-list" class="animal-list obscured">
+        @foreach (Animal animal in Model) @await Html.PartialAsync("AnimalListItem", animal)
+    </ul>
 }
-else
+else 
 {
-    <p>No animals found</p>
+    <p>No animals found.</p> 
 }
 
 @await Html.PartialAsync("PageLinkSpread")
