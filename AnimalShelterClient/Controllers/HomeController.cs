@@ -16,9 +16,10 @@ public class HomeController : Controller
     _logger = logger;
   }
   [AllowAnonymous]
-  public async Task<IActionResult> Index(int page = 1, int pageSize = 5)
+  public async Task<IActionResult> Index(int page = 1, int pageSize = 3)
   {
     List<Animal> animalList = new List<Animal> { };
+    int totalCount;
     using (var httpClient = new HttpClient())
     {
       using (var response = await httpClient.GetAsync($"http://localhost:5000/api/Animals?&page={page}&pageSize={pageSize}"))
@@ -26,27 +27,25 @@ public class HomeController : Controller
         string apiResponse = await response.Content.ReadAsStringAsync();
         JObject jsonResponse = JObject.Parse(apiResponse);
         JArray animalArray = (JArray)jsonResponse["data"];
+        totalCount = (int)(JValue)jsonResponse["totalCount"];
         animalList = animalArray.ToObject<List<Animal>>();
       }
     }
-
-    List<Animal> animalList2 = new List<Animal> { };
-    using (var httpClient = new HttpClient())
-    {
-      using (var response = await httpClient.GetAsync("http://localhost:5000/api/Animals?&page=1&pageSize=1001"))
-      {
-        string apiResponse = await response.Content.ReadAsStringAsync();
-        JObject jsonResponse2 = JObject.Parse(apiResponse);
-        JArray animalArray2 = (JArray)jsonResponse2["data"];
-        animalList2 = animalArray2.ToObject<List<Animal>>();
-      }
-    }
-
-    ViewBag.LastId = animalList2.Count();
-    
+    var totalPages = (totalCount % pageSize) == 0 ? (totalCount / pageSize) : Math.Round((decimal)(totalCount / pageSize)) + 1;
+    ViewBag.TotalPages = totalPages;
+    ViewBag.TotalCount = totalCount;
     ViewBag.CurrentPage = page;
-    ViewBag.PageSize = pageSize;
-    
+    int distanceFromEnd = (int)(totalPages) - page;
+    if (page <= 2) {
+      ViewBag.StartingPageLinkIndex = 1;
+    } else if (page >= totalPages - 1) {
+      ViewBag.StartingPageLinkIndex = ViewBag.CurrentPage - (4 - distanceFromEnd);
+      if (ViewBag.StartingPageLinkIndex <= 0) {
+        ViewBag.StartingPageLinkIndex = 1;
+      }
+    } else {
+      ViewBag.StartingPageLinkIndex =  ViewBag.CurrentPage - 2;
+    }    
     return View(animalList);
   }
   public IActionResult Privacy()

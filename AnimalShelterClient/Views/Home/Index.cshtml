@@ -2,19 +2,18 @@
     ViewData["Title"] = "Animal Shelter Client";
 }
 
-@using Newtonsoft.Json;
-
 @using AnimalShelterClient.Models
 
-@await Html.PartialAsync("PageLinkSpread")
-
-<h1 class="page-header"><span>All Animals</span>
+<h1 class="page-header"><span>@ViewBag.TotalCount animals available</span></h1>
+<h1 class="page-header">
 @if (User.Identity.IsAuthenticated) 
-{
-    @await Html.PartialAsync("CreateModal", new Animal())
-    <button class="green" onclick="showModal('create-modal')">Add an Animal</button>
-}
+    {
+        @await Html.PartialAsync("CreateModal", new Animal())
+        <button class="green" onclick="showModal('create-modal')">Add an Animal</button>
+    }
 </h1>
+<div class="page-display">Page @ViewBag.CurrentPage of @ViewBag.TotalPages</div>
+@await Html.PartialAsync("PageLinkSpread")
 
 @if (Model != null)
 {
@@ -36,7 +35,6 @@
                 <div class="button-area">    
                     @await Html.PartialAsync("EditModal", animal)
                     @await Html.PartialAsync("DeleteModal", animal) 
-
                     <button class="yellow" onclick="showModal('edit-modal-@animal.AnimalId')">Edit</button>
                     <button class="red" onclick="showModal('delete-modal-@animal.AnimalId')">Delete</button>
                 </div>
@@ -51,6 +49,7 @@ else
 }
 
 @await Html.PartialAsync("PageLinkSpread")
+<div class="page-display">Page @ViewBag.CurrentPage of @ViewBag.TotalPages</div>
 
 <script>
 window.addEventListener("load", () => {
