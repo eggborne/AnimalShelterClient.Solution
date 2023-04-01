@@ -1,0 +1,30 @@
+@model AnimalShelterClient.Models.Animal
+
+<div id="create-modal" class="modal create-modal obscured">
+  <div class="modal-message">Add an animal</div>
+
+  @using (Html.BeginForm("Create", "Home", new { id = @Model.AnimalId, currentPage = ViewBag.CurrentPage, pageSize = ViewBag.pageSize }))
+  {
+    <div class="form-row">
+      @Html.LabelFor(model => model.Name)
+      @Html.TextBoxFor(model => model.Name)
+    </div>
+    <div class="form-row">
+      @Html.LabelFor(model => model.Species)
+      @Html.TextBoxFor(model => model.Species)
+    </div>
+    <div class="form-row">
+      @Html.LabelFor(model => model.Breed)
+      @Html.TextBoxFor(model => model.Breed)
+    </div>
+    <div class="form-row">
+      @Html.LabelFor(model => model.Gender)
+      @Html.TextBoxFor(model => model.Gender)
+    </div>
+    <button class="green" type="submit">Add animal</button>
+  }
+
+  <div class="button-area">
+    <button onclick="hideModal('create-modal')">Cancel</button>
+  </div>
+</div>

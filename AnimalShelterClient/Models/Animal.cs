@@ -19,7 +19,7 @@ namespace AnimalShelterClient.Models
       string result =  apiCallTask.Result;
 
       JObject jsonResponse = JObject.Parse(result);
-      List<Animal> animalList = JsonConvert.DeserializeObject<List<Animal>>(jsonResponse["data"].ToString());
+      List<Animal> animalList = JsonConvert.DeserializeObject<List<Animal>>(jsonResponse["data"].ToString());      
       return animalList.ToArray();
     }
 

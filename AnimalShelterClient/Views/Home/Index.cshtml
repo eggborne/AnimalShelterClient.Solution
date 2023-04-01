@@ -10,10 +10,9 @@
 
 <h1 class="page-header"><span>All Animals</span>
 @if (User.Identity.IsAuthenticated) 
-{ 
-  <a href='@Url.Action("Create", "Home")'>
-      <button class="green">Add an Animal</button>
-  </a>
+{
+    @await Html.PartialAsync("CreateModal", new Animal())
+    <button class="green" onclick="showModal('create-modal')">Add an Animal</button>
 }
 </h1>
 
@@ -22,9 +21,17 @@
 <ul id="home-animal-list" class="animal-list obscured">
     @foreach (Animal animal in Model)
     {
-        <li class="animal-list-item">
-            <div class="animal-text">@animal.Name</div>
-            <div class="animal-speaker">@animal.Breed</div>
+        <li class="animal-list-item @(animal.Species)-list-item">
+            <div class="animal-id">id #@animal.AnimalId</div>
+
+            <div class="icon @(animal.Species)-icon @animal.Gender.ToLower()">
+                <div class="animal-species">@animal.Species</div>
+            </div>
+            <div class="animal-stat-list">
+                <div class="animal-name">@animal.Name</div>
+                <div class="animal-breed">@animal.Breed</div>
+                <div class="animal-gender">@animal.Gender</div>
+            </div>
             @if (User.Identity.IsAuthenticated) {
                 <div class="button-area">    
                     @await Html.PartialAsync("EditModal", animal)

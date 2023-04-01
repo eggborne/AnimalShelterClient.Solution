@@ -21,7 +21,7 @@ public class HomeController : Controller
     List<Animal> animalList = new List<Animal> { };
     using (var httpClient = new HttpClient())
     {
-      using (var response = await httpClient.GetAsync($"http://localhost:5000/api/Animals?question=false&page={page}&pageSize={pageSize}"))
+      using (var response = await httpClient.GetAsync($"http://localhost:5000/api/Animals?&page={page}&pageSize={pageSize}"))
       {
         string apiResponse = await response.Content.ReadAsStringAsync();
         JObject jsonResponse = JObject.Parse(apiResponse);
@@ -29,20 +29,24 @@ public class HomeController : Controller
         animalList = animalArray.ToObject<List<Animal>>();
       }
     }
+
     List<Animal> animalList2 = new List<Animal> { };
     using (var httpClient = new HttpClient())
     {
-      using (var response = await httpClient.GetAsync("http://localhost:5000/api/Animals?question=false&page=1&pageSize=1001"))
+      using (var response = await httpClient.GetAsync("http://localhost:5000/api/Animals?&page=1&pageSize=1001"))
       {
         string apiResponse = await response.Content.ReadAsStringAsync();
-        JObject jsonResponse = JObject.Parse(apiResponse);
-        JArray animalArray = (JArray)jsonResponse["data"];
-        animalList2 = animalArray.ToObject<List<Animal>>();
+        JObject jsonResponse2 = JObject.Parse(apiResponse);
+        JArray animalArray2 = (JArray)jsonResponse2["data"];
+        animalList2 = animalArray2.ToObject<List<Animal>>();
       }
     }
+
     ViewBag.LastId = animalList2.Count();
+    
     ViewBag.CurrentPage = page;
     ViewBag.PageSize = pageSize;
+    
     return View(animalList);
   }
   public IActionResult Privacy()
@@ -50,16 +54,11 @@ public class HomeController : Controller
     return View();
   }
 
-  public ActionResult Create()
-  {
-    return View();
-  }
-
   [HttpPost]
-  public ActionResult Create(Animal animal)
+  public ActionResult Create(Animal animal, int currentPage, int pageSize)
   {
     Animal.Post(animal);
-    return RedirectToAction("Index");
+    return RedirectToAction("Index", new { page = currentPage, pageSize = pageSize });
   }
 
   public async Task<ActionResult> LoadEdit(int id)
