@@ -8,9 +8,8 @@
           <button type="submit" class="red">Log out</button>
       }
   } else {
-      <a href="/Account">
-          <button class="green">Log in / Register</button>
-      </a>
+    <button onclick="showModal('login-register-modal')" class="green">Log in / Register</button>  
   }
+     @await Html.PartialAsync("LoginRegisterModal")
   </div>
 </header>

@@ -8,12 +8,23 @@
   --header-color: #150d0d;
   --header-text-color: #5f835f;
 	--text-highlight-color: rgb(160, 128, 68);
+  --hover-outline-color: rgb(193, 238, 193);
+
+  --default-button-color: rgb(84, 78, 78);
+  --button-green: green;
+  --button-yellow: rgb(146, 146, 51);;
+  --button-red: rgb(96, 27, 27);
+
+  --create-bg-color: rgb(70, 84, 63);
+  --delete-bg-color: rgb(76, 64, 64);
+  --edit-bg-color: rgb(76, 76, 64);
 
   --dog-color: #77614657;
   --cat-color: #70724d78;
   --male-color: #b1b2ce;
   --female-color: #c4a8bb;
 }
+
 *, * *, * * * {
   box-sizing: border-box;
 }
@@ -42,8 +53,12 @@ input, select, textarea {
   padding: 0.5rem;
 }
 
+select {
+  cursor: pointer;
+}
+
 a {
-  color: rgba(255, 145, 0, 0.606);
+  color: rgb(255, 145, 0);
 }
 
 .highlighted {
@@ -109,6 +124,7 @@ h1.page-header {
   margin-top: 0;
   gap: 1rem;
 }
+
 h1 button {
   font-size: 1rem;
 }
@@ -137,9 +153,15 @@ button {
   max-width: 8rem;
   font-size: inherit;
   font-family: inherit;
-  background-color: rgb(84, 78, 78);
+  background-color: var(--default-button-color);
   color: #eee;
   border-radius: 0.25rem;
+  cursor: pointer;
+  transition: transform 100ms;
+}
+
+button:active {
+  transform: scale(0.9);
 }
 
 button:disabled {
@@ -152,11 +174,12 @@ button:disabled:hover {
 }
 
 button.green {
-  background-color: green;
+  background-color: var(--button-green);
   max-width: unset;
 }
+
 button.yellow {
-  background-color: rgb(146, 146, 51);
+  background-color: var(--button-yellow)
 }
 
 .modal button.yellow {
@@ -165,11 +188,11 @@ button.yellow {
 }
 
 button.red {
-  background-color: rgb(96, 27, 27);
+  background-color: var(--button-red);
 }
 
-button:hover {
-  outline: 0.25rem solid rgb(193, 238, 193);
+button:hover, .page-link:hover {
+  outline: 0.25rem solid var(--hover-outline-color);
 }
 
 .button-area {
@@ -227,13 +250,14 @@ button:hover {
   gap: 2rem;
   list-style-type: none;
   opacity: 1;
-  transition: opacity 200ms ease, transform 100ms ease;
+  transform-origin: top center;
+  transition: opacity 200ms ease, transform 200ms ease;
 }
 
 .animal-list.obscured {
   transition: none;
   opacity: 0;
-  /* transform: translateY(1rem); */
+  transform: scale(1.05);
 }
 
 .animal-list-item {
@@ -360,7 +384,7 @@ button:hover {
   position: absolute;
 }
 
-.modal > .modal-message {
+.modal .modal-message {
   font-size: 1.5rem;
 	width: 100%;
 	display: flex;
@@ -369,7 +393,7 @@ button:hover {
 	gap: 0.5rem;
 }
 
-.modal > .modal-message > .highlighted {
+.modal .modal-message > .highlighted {
   font-size: 2rem;
 	font-weight: bold;
 }
@@ -388,20 +412,46 @@ button:hover {
   text-align: center;
 }
 
-.modal#login-modal, .modal#create-modal{
-	background-color: rgb(70, 84, 63);
-}
-
-.modal#register-modal {
-	background-color: rgb(116, 124, 74);
+.modal#create-modal{
+	background-color: var(--create-bg-color);
 }
 
 .modal.delete-modal {
-	background-color: rgb(76, 64, 64);
+	background-color: var(--delete-bg-color);
 }
 
 .modal.edit-modal {
-	background-color: rgb(76, 76, 64);
+	background-color: var(--edit-bg-color)
+}
+
+.modal#login-register-modal {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2rem;
+  background-color: var(--create-bg-color);
+}
+.modal#login-register-modal .modal-message {
+  font-weight: bold;
+}
+
+.modal#login-register-modal > .button-area {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.modal#login-register-modal form {
+  flex-grow: 1;
+}
+.modal#login-register-modal .form-row {
+  flex-grow: 1;
+}
+
+#login-area, #register-area {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .not-logged-in-message, .empty-list-message {

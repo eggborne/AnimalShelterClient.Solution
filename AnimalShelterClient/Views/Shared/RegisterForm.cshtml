@@ -1,0 +1,18 @@
+@model AnimalShelterClient.ViewModels.RegisterViewModel
+
+@using (Html.BeginForm("Register", "Account"))
+{
+  <div class="form-row">
+    @Html.LabelFor(user => user.Email)
+    @Html.TextBoxFor(user=> user.Email)
+  </div>
+  <div class="form-row">
+    @Html.LabelFor(user=> user.Password)
+    @Html.EditorFor(user=> user.Password)
+  </div>
+  <div class="form-row">
+    @Html.LabelFor(user=> user.ConfirmPassword)
+    @Html.EditorFor(user=> user.ConfirmPassword)
+  </div>
+  <button class="yellow" type="submit">Register</button>
+}

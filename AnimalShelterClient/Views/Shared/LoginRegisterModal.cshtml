@@ -1,0 +1,15 @@
+@using AnimalShelterClient.ViewModels
+
+<div id="login-register-modal" class="modal obscured">
+  <div id="login-area">
+    <div class="modal-message">Log in</div>
+    @await Html.PartialAsync("LoginForm", new LoginViewModel())
+  </div>
+  <div id="register-area">
+    <div class="modal-message">Register</div>
+    @await Html.PartialAsync("RegisterForm", new RegisterViewModel())
+  </div>
+  <div class="button-area">
+    <button onclick="hideModal('login-register-modal')">Cancel</button>
+  </div>
+</div>

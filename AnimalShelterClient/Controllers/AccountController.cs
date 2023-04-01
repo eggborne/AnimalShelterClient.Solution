@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using AnimalShelterClient.Models;
-using System.Threading.Tasks;
 using AnimalShelterClient.ViewModels;
 
 namespace AnimalShelterClient.Controllers
@@ -17,16 +16,6 @@ namespace AnimalShelterClient.Controllers
       _userManager = userManager;
       _signInManager = signInManager;
       _db = db;
-    }
-
-    public ActionResult Index()
-    {
-      return View();
-    }
-
-    public IActionResult Register()
-    {
-      return View();
     }
 
     [HttpPost]
@@ -61,11 +50,6 @@ namespace AnimalShelterClient.Controllers
           return View();
         }
       }
-    }
-
-    public ActionResult Login()
-    {
-      return View();
     }
 
     [HttpPost]
