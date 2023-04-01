@@ -426,6 +426,7 @@ button:hover, .page-link:hover {
 
 .modal.hidden {
   display: none;
+  z-index: -1;
 }
 
 .modal .button-area {
