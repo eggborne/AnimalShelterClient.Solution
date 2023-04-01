@@ -422,7 +422,10 @@ button:hover, .page-link:hover {
   transform: scale(0.95);
 	opacity: 0;
 	pointer-events: none;
-  transition: none;
+}
+
+.modal.hidden {
+  display: none;
 }
 
 .modal .button-area {

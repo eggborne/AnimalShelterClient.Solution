@@ -1,6 +1,6 @@
 @model AnimalShelterClient.Models.Animal
 
-<div id="delete-modal-@Html.DisplayFor(model => model.AnimalId)" class="modal delete-modal obscured">
+<div id="delete-modal-@Html.DisplayFor(model => model.AnimalId)" class="modal delete-modal obscured hidden">
   <div class="modal-message">
     <div>Are you sure you want to delete <span class="highlighted">@Html.DisplayFor(model => model.Name)</span>?</div>
   </div>

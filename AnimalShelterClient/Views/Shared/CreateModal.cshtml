@@ -1,6 +1,6 @@
 @model AnimalShelterClient.Models.Animal
 
-<div id="create-modal" class="modal create-modal obscured">
+<div id="create-modal" class="modal create-modal obscured hidden">
   <div class="modal-message">New animal</div>
 
   @using (Html.BeginForm("Create", "Home", new { id = @Model.AnimalId, currentPage = ViewBag.CurrentPage, pageSize = ViewBag.pageSize }))

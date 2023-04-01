@@ -1,6 +1,6 @@
 @model AnimalShelterClient.Models.Animal
 
-<div id="edit-modal-@Html.DisplayFor(model => model.AnimalId)" class="modal edit-modal obscured">
+<div id="edit-modal-@Html.DisplayFor(model => model.AnimalId)" class="modal edit-modal obscured hidden">
   <div class="modal-message">Editing <span class="highlighted">@Html.DisplayFor(model => model.Name)</span></div>
 
   @using (Html.BeginForm("Edit", "Home", new { currentPage = ViewBag.CurrentPage, pageSize = ViewBag.PageSize }))
