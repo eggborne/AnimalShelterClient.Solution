@@ -1,0 +1,32 @@
+@model AnimalShelterClient.Models.Animal
+
+<div id="edit-modal-@Html.DisplayFor(model => model.AnimalId)" class="modal edit-modal obscured">
+  <div class="modal-message">Editing <span class="highlighted">@Html.DisplayFor(model => model.Name)</span></div>
+
+  @using (Html.BeginForm("Edit", "Home"))
+  {
+    @Html.HiddenFor(model => model.AnimalId)
+    <div class="form-row">
+      @Html.LabelFor(model => model.Name)
+      @Html.EditorFor(model => model.Name)
+    </div>
+    <div class="form-row">
+      @Html.LabelFor(model => model.Species)
+      @Html.EditorFor(model => model.Species)
+    </div>
+    <div class="form-row">
+      @Html.LabelFor(model => model.Breed)
+      @Html.EditorFor(model => model.Breed)
+    </div>
+    <div class="form-row">
+      @Html.LabelFor(model => model.Gender)
+      @Html.EditorFor(model => model.Gender)
+    </div>
+
+    <button class="yellow" type="submit">Save changes</button>
+  }
+  
+  <div class="button-area">
+    <button onclick="hideModal('edit-modal-@Html.DisplayFor(model => model.AnimalId)')">Cancel</button>
+  </div>
+</div>

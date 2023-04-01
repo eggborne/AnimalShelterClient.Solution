@@ -16,7 +16,7 @@ public class HomeController : Controller
     _logger = logger;
   }
   [AllowAnonymous]
-  public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
+  public async Task<IActionResult> Index(int page = 1, int pageSize = 5)
   {
     List<Animal> animalList = new List<Animal> { };
     using (var httpClient = new HttpClient())
@@ -102,6 +102,6 @@ public class HomeController : Controller
   public ActionResult DeleteConfirmed(int id, int currentPage)
   {
     Animal.Delete(id);
-    return RedirectToAction("Index", new { page = currentPage, pageSize = 10 } );
+    return RedirectToAction("Index", new { page = currentPage, pageSize = 5 } );
   }
 }

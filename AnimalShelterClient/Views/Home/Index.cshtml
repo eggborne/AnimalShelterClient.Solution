@@ -2,6 +2,8 @@
     ViewData["Title"] = "Animal Shelter Client";
 }
 
+@using Newtonsoft.Json;
+
 @using AnimalShelterClient.Models
 
 @await Html.PartialAsync("PageLinkSpread")
@@ -24,17 +26,12 @@
             <div class="animal-text">@animal.Name</div>
             <div class="animal-speaker">@animal.Breed</div>
             @if (User.Identity.IsAuthenticated) {
-                <div class="button-area">
-                @using (Html.BeginForm("LoadEdit", "Home", new { id = animal.AnimalId }))
-                {
-                    <button type="submit" class="yellow">Edit</button>
-                }
-                @using (Html.BeginForm("Delete", "Home", FormMethod.Get))
-                {
-                  @Html.Hidden("id", animal.AnimalId)
-                  <input type="hidden" name="currentPage" value=@ViewBag.CurrentPage>
-                  <button class="red">Delete</button>
-                }
+                <div class="button-area">    
+                    @await Html.PartialAsync("EditModal", animal)
+                    @await Html.PartialAsync("DeleteModal", animal) 
+
+                    <button class="yellow" onclick="showModal('edit-modal-@animal.AnimalId')">Edit</button>
+                    <button class="red" onclick="showModal('delete-modal-@animal.AnimalId')">Delete</button>
                 </div>
             }
         </li>
