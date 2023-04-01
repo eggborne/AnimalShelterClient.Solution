@@ -94,7 +94,7 @@ h4 {
 }
 
 main {
-  padding: 2rem
+  padding: 1rem 2rem;
 }
 
 ul {
@@ -190,7 +190,33 @@ button:hover {
 
 .page-display {
   width: 100%;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 3rem 0;
+}
+
+.page-display > div:first-child {
+  font-weight: bold;
+  margin: 0.5rem;
+}
+
+.page-display select {
+  font-size: 1.25rem;
+  height: 2.5rem;
+}
+
+.page-display > form {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap:0.5rem;
+}
+
+.page-display > form button {
+  padding: 0 0.5rem;
+  height: 2.5rem
 }
 
 .animal-list {
@@ -403,6 +429,14 @@ form {
 	flex-direction: column;
 	min-width: min-content;
 	max-width: 90vw;
+}
+
+.select-form {
+  outline: 2px solid orange;
+}
+
+form select {
+  width: min-content;
 }
 
 form button {

@@ -13,7 +13,23 @@
     }
 </h1>
 
-<div class="page-display">Page @ViewBag.CurrentPage of @ViewBag.TotalPages</div>
+<div class="page-display">
+   <div>Page @ViewBag.CurrentPage of @ViewBag.TotalPages</div>
+   <label for="pageSize">Results per page:</label>
+   @using (Html.BeginForm("Index", "Home", new { currentPage = 1 }))
+   {
+    <select name="pageSize">
+        @for (var i = 3; i <= 30; i += 3)
+        {
+            <option selected=@(ViewBag.PageSize == i) value="@i">@i</option>
+        }
+    </select>
+    <div>
+        <button>Change</button>
+    </div>
+   }
+   
+</div>
 @await Html.PartialAsync("PageLinkSpread")
 
 @if (Model != null)
