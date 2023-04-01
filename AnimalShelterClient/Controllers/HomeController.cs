@@ -35,6 +35,7 @@ public class HomeController : Controller
     ViewBag.TotalPages = totalPages;
     ViewBag.TotalCount = totalCount;
     ViewBag.CurrentPage = page;
+    ViewBag.PageSize = pageSize;
     int distanceFromEnd = (int)(totalPages) - page;
     if (page <= 2) {
       ViewBag.StartingPageLinkIndex = 1;
